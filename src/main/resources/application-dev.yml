@@ -1,0 +1,65 @@
+# show sql in console
+logging:
+    level:
+        com:
+            wangzaiplus:
+                test:
+                    mapper: debug
+# mybatis settings
+mybatis:
+    check-config-location: true
+    mapper-locations: classpath*:/orm/*.xml
+    type-aliases-package: com.xiaole.test.pojo
+server:
+    port: 8082
+spring:
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: root123456
+        type: com.alibaba.druid.pool.DruidDataSource
+        url: jdbc:mysql://192.168.68.137:3306/RabbitMQ?useUnicode=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useLegacyDatetimeCode=false
+        username: root
+    mail:
+        from: 9h_sc@9hjf.com
+        host: smtp.qiye.163.com
+        password: 9HUIjinfu
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true
+        username: 9h_sc@9hjf.com
+    mvc:
+        view:
+            suffix: .html
+    resources:
+        static-locations: classpath:/templates/,classpath:/static/
+
+    # rabbitmq设置
+    rabbitmq:
+        host: 192.168.68.137
+        port: 5672
+        username: root
+        password: root
+        # 开启confirms回调 P -> Exchange
+        publisher-confirms: true
+        # 开启returnedMessage回调 Exchange -> Queue
+        publisher-returns: true
+        listener:
+            simple:
+                # 设置手动确认(ack) Queue -> C
+                acknowledge-mode: manual
+                prefetch: 100
+    # redis settings
+    redis:
+        host: localhost
+        jedis:
+            pool:
+                max-idle: 32
+                max-wait: -1
+                min-idle: 0
+        password: xiaole
+        port: 6379
+        timeout: 0
