@@ -553,7 +553,7 @@
           supportsPassive = true;
         }
       })); // https://github.com/facebook/flow/issues/285
-      window.addEventListener('test-passive', null, opts);
+      window.addEventListener('dowel-passive', null, opts);
     } catch (e) {}
   }
 
@@ -7204,12 +7204,12 @@
    *
    * Possible cases:
    *
-   * - test
-   * - test[key]
-   * - test[test1[key]]
-   * - test["a"][key]
-   * - xxx.test[a[a].test1[key]]
-   * - test.xxx.a["asa"][test1[key]]
+   * - dowel
+   * - dowel[key]
+   * - dowel[test1[key]]
+   * - dowel["a"][key]
+   * - xxx.dowel[a[a].test1[key]]
+   * - dowel.xxx.a["asa"][test1[key]]
    *
    */
 

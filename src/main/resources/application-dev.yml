@@ -9,7 +9,7 @@ logging:
 mybatis:
     check-config-location: true
     mapper-locations: classpath*:/orm/*.xml
-    type-aliases-package: com.xiaole.test.pojo
+    type-aliases-package: com.xiaole.dowel.pojo
 server:
     port: 8082
 spring:

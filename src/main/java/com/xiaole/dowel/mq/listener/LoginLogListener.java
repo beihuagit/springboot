@@ -1,0 +1,34 @@
+package com.xiaole.dowel.mq.listener;
+
+import com.rabbitmq.client.Channel;
+import com.xiaole.dowel.config.RabbitDirectQueueConfig;
+import com.xiaole.dowel.mq.BaseConsumer;
+import com.xiaole.dowel.mq.BaseConsumerProxy;
+import com.xiaole.dowel.mq.consumer.LoginLogConsumer;
+import com.xiaole.dowel.service.MsgLogService;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.io.IOException;
+
+@Component
+public class LoginLogListener {
+
+    @Resource
+    private LoginLogConsumer loginLogConsumer;
+
+    @Resource
+    private MsgLogService msgLogService;
+
+    @RabbitListener(queues = RabbitDirectQueueConfig.LOGIN_LOG_QUEUE_NAME)
+    public void consume(Message message, Channel channel) throws IOException {
+        BaseConsumerProxy baseConsumerProxy = new BaseConsumerProxy(loginLogConsumer, msgLogService);
+        BaseConsumer proxy = (BaseConsumer) baseConsumerProxy.getProxy();
+        if (null != proxy) {
+            proxy.consume(message, channel);
+        }
+    }
+
+}
